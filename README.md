@@ -1,8 +1,7 @@
-# Banco-de-Dados
-<h1>Estudos realizados nas aulas de Banco de Dados na faculdade Fatec Baixada Santista - Rubens Lara.</h1>
-<h2>Conceitos estudados:</h2>
-<ul>
-  <li>Banco de dados relacionais</li>
-  <li>Modelagem de banco de dados</li>
-  <li>Linguagem de programação SQL no SQL Server</li>
-</ul>
+## Sobre
+Este repositório contém os materiais dos meus estudos nas aulas de Banco de Dados, realizados na Fatec Baixada Santista - Rubens Lara. Nesse repositório terá anotações, exercícios e projetos relacionados aos tópicos abordados.
+
+## Conceitos estudados
+- **Banco de dados relacionais**: Entendendo a estrutura dos bancos de dados relacionais, incluindo conceitos de tabelas, chaves primárias e estrangeiras, e relacionamentos.
+- **Modelagem de banco de dados**: Técnicas de modelagem, como diagramas ER (Entidade-Relacionamento) e criação de esquemas de banco de dados.
+- **Linguagem de programação SQL no SQL Server**: Aprendizado e prática da linguagem SQL para criar, modificar e consultar bancos de dados no SQL Server.
