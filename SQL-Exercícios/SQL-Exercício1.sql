@@ -1,8 +1,8 @@
--- ExercÌcios inicias com linguagem sql
-
+-- Exerc√≠cios inicias com linguagem sql
+*.sch linguist-detectable=true
 drop table tb_alunos --exclui a tabela inteira
-truncate table tb_alunos --exclui todas as linhas (n„o gera log, "passado" recuper·vel)
-delete from tb_alunos where id_aluno = 1 --sem o where È igual o truncate (gera log); com where exclui uma linha especÌfica 
+truncate table tb_alunos --exclui todas as linhas (n√£o gera log, "passado" recuper√°vel)
+delete from tb_alunos where id_aluno = 1 --sem o where √© igual o truncate (gera log); com where exclui uma linha espec√≠fica 
 
 
 create table tb_alunos
@@ -29,7 +29,7 @@ select count(*) from tb_alunos where nr_media > 8
 select avg (nr_media) from tb_alunos
 select max (nr_media) from tb_alunos
 select min (nr_media) from tb_alunos
-select avg(nr_media) as MÈdia,max(nr_media) as M·ximo ,min(nr_media) as MÌnimo from tb_alunos
+select avg(nr_media) as M√©dia,max(nr_media) as M√°ximo ,min(nr_media) as M√≠nimo from tb_alunos
 
 select * from tb_alunos
 
@@ -50,7 +50,7 @@ create table tb_gr_inst
 nm_grinst char (30),)
 
 insert into tb_gr_inst values (1,'superior completo')
-insert into tb_gr_inst values (2,'pÛs superior completo')
+insert into tb_gr_inst values (2,'p√≥s superior completo')
 insert into tb_gr_inst values (3,'mestrado completo')
 insert into tb_gr_inst values (4,'doutorado completo')
 select * from tb_gr_inst
@@ -107,8 +107,8 @@ insert into tb_proprietario values (3,'proprietario3')
 insert into tb_proprietario values (4,'proprietario4')
 insert into tb_proprietario values (5,'proprietario5')
 select * from tb_proprietario
-select nm_prop as 'proprietarios' from tb_proprietario --lista os propriet·rios
-select count (*) as 'qtde de proprietarios' from tb_proprietarios --mostra quantidade de propriet·rios
+select nm_prop as 'proprietarios' from tb_proprietario --lista os propriet√°rios
+select count (*) as 'qtde de proprietarios' from tb_proprietarios --mostra quantidade de propriet√°rios
 
 
 
@@ -122,27 +122,27 @@ insert into tb_aptos values (4, 'apartamento4', 100, 4)
 insert into tb_aptos values (5, 'apartamento5', 100, 5)
 select * from tb_aptos
 
-update tb_aptos set nr_metragem = 80 -- alterar conte˙do da tabela toda
-update tb_aptos set nr_metragem = 100 where cd_prop = 1 -- alterar conte˙do da tabela, sÛ do prop 1
-update tb_aptos set nr_metragem = 150 where cd_apto = 1 -- alterar conte˙do da tabela, sÛ do apto 1
+update tb_aptos set nr_metragem = 80 -- alterar conte√∫do da tabela toda
+update tb_aptos set nr_metragem = 100 where cd_prop = 1 -- alterar conte√∫do da tabela, s√≥ do prop 1
+update tb_aptos set nr_metragem = 150 where cd_apto = 1 -- alterar conte√∫do da tabela, s√≥ do apto 1
 
-delete from tb_aptos --exclus„o de linha(s) da tabela. Todas as linhas, sÛ fica a estrutura
-delete from tb_aptos where cd_apto = 2 --exclus„o de linha(s) da tabela com apto = 2
+delete from tb_aptos --exclus√£o de linha(s) da tabela. Todas as linhas, s√≥ fica a estrutura
+delete from tb_aptos where cd_apto = 2 --exclus√£o de linha(s) da tabela com apto = 2
 
---m·ximo, mÌnimo, mÈdia, somatÛria
+--m√°ximo, m√≠nimo, m√©dia, somat√≥ria
 select max(nr_metragem) from tb_aptos
 select min(nr_metragem) from tb_aptos
 select avg(nr_metragem) from tb_aptos
 select sum(nr_metragem) from tb_aptos
-select max(nr_metragem) as 'M·ximo',min(nr_metragem) as	'MÌnimo',avg(nr_metragem)as 'MÈdia',sum(nr_metragem) as 'Soma'
+select max(nr_metragem) as 'M√°ximo',min(nr_metragem) as	'M√≠nimo',avg(nr_metragem)as 'M√©dia',sum(nr_metragem) as 'Soma'
 	   from tb_aptos
 
 --Leitura de duas tabelas
 select nm_prop,nm_apto,nr_metragem from tb_proprietario,tb_aptos
 	where tb_proprietario.cd_prop = tb_aptos.cd_prop --and tb_proprietario.cd_prop = 1 
-			     --PK                    --FK	     --sÛ printa do propriet·rio 1
+			     --PK                    --FK	     --s√≥ printa do propriet√°rio 1
 		
---Lista o nome do propriet·rio cujo apto tem a maior metragem
+--Lista o nome do propriet√°rio cujo apto tem a maior metragem
 select nm_prop,nr_metragem from tb_proprietario,tb_aptos
 	where nr_metragem = (select max(nr_metragem) from tb_aptos)
 	and tb_proprietario.cd_prop = tb_aptos.cd_apto
@@ -152,19 +152,19 @@ select nm_prop,nr_metragem from tb_proprietario,tb_aptos
 	where nr_metragem > (select avg(nr_metragem) from tb_aptos)
 	and tb_proprietario.cd_prop = tb_aptos.cd_apto
 
---SomatÛria com agrupamento
-select  cd_prop as 'Propriet·rio',sum(nr_metragem) as'Total metragem' from tb_aptos
+--Somat√≥ria com agrupamento
+select  cd_prop as 'Propriet√°rio',sum(nr_metragem) as'Total metragem' from tb_aptos
 	group by cd_prop
 
 --Excluir as linhas da tabela aptos para o registro para os registros menores que a media
-select count(*) from tb_aptos where nr_metragem < (select avg(nr_metragem) from tb_aptos) --saber quantas linhas ser„o afetadas
+select count(*) from tb_aptos where nr_metragem < (select avg(nr_metragem) from tb_aptos) --saber quantas linhas ser√£o afetadas
 delete tb_aptos where nr_metragem < (select avg(nr_metragem) from tb_aptos) 
 
 --Alterar a qntd de metragem para 85 de todos os registros com metragem =
-update tb_aptos set nr_metragem = 85 where nr_metragem = (select min(nr_metragem) from tb_aptos) --igual metragem mÌnima
+update tb_aptos set nr_metragem = 85 where nr_metragem = (select min(nr_metragem) from tb_aptos) --igual metragem m√≠nima
 update tb_aptos set nr_metragem = 85 where nr_metragem = 150 --igual a150
 
---Excluir todas as informaÁıes (das 2 tabelas) do propriet·tio = 3
+--Excluir todas as informa√ß√µes (das 2 tabelas) do propriet√°tio = 3
 delete from tb_aptos where cd_prop = 3
 delete from tb_proprietario where cd_prop = 3
 
