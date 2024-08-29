@@ -67,7 +67,7 @@ ic_vendido char (1),
 dt_lancto date,
 qt_imovelIndicado int)
 
---Criando chaves primárias usando o ALTER TABLE.
+--Criando chaves primárias usando o ALTER TABLE
 -- ALTER TABLE *tabela*  ADD PRIMARY KEY *(campo)*
 
 ALTER TABLE tb_faixaImovel  ADD PRIMARY KEY (cd_faixa);
@@ -144,3 +144,47 @@ VALUES
 (2, 4, 100000, '15/02/09'), 
 (3, 1, 160000, '05/01/09'), 
 (3, 2, 140000, '20/02/09');
+
+--Aumente o preço de vendas dos imóveis em 10%
+UPDATE tb_imovel
+SET vl_preco = vl_preco + (vl_preco*0.10)
+
+--Abaixe o preço de venda dos imóveis do vendedor 1 em 5% 
+UPDATE tb_imovel
+SET vl_preco = vl_preco - (vl_preco*0.05)
+WHERE cd_vendedor = 1
+
+--Aumente em 5% o valor das ofertas do comprador 2
+UPDATE tb_oferta
+SET vl_oferta = vl_oferta + (vl_oferta*0.05)
+WHERE cd_comprador = 2
+
+--Altere o endereço do comprador 3 para R. ANANÁS, 45 e o estado para RJ
+UPDATE tb_comprador
+SET ds_endereco = 'R. ANANÁS, 45', sg_estado = 'RJ'
+WHERE cd_comprador = 3
+
+--Altere a oferta do comprador 2 no imóvel 4 para 101.000 
+UPDATE tb_oferta
+SET vl_oferta = 101000
+WHERE cd_comprador = 2 AND cd_imovel = 4
+
+--Exclua a oferta do comprador 3 no imóvel 1
+DELETE FROM tb_oferta
+WHERE cd_comprador = 3 AND cd_imovel = 1
+
+--Exclua a cidade 3 do estado SP
+DELETE FROM tb_cidade
+WHERE cd_cidade = 3 AND sg_estado = 'SP'
+
+--Inclua linhas na tabela FAIXA_IMOVEL: 
+--cd_Faixa nmFaixa vl_Minimo vl_Maximo
+--  1      BAIXO      0       105000
+--  2      MÉDIO    105001    180000
+--  3      ALTO     180001    999999 
+INSERT INTO tb_faixaImovel (cd_faixa, nm_faixa, vl_minimo, vl_maximo)
+VALUES
+(1, 'BAIXO', 0, 105000),
+(2, 'MÉDIO', 105001, 180000),
+(3, 'ALTO', 180001, 999999 );
+
