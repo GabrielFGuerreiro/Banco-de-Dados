@@ -210,3 +210,8 @@ SELECT cd_imovel, cd_vendedor, vl_preco, sg_estado
 FROM tb_imovel
 WHERE vl_preco < 150000 AND sg_estado = 'RJ'
 
+--Liste as colunas cd_Imovel, cd_Vendedor, vl_Preco e sg_Estado dos imóveis cujo preço de venda seja inferior a 150 mil e o vendedor não seja 2. 
+SELECT cd_imovel, cd_vendedor, vl_preco, sg_estado
+FROM tb_imovel
+WHERE vl_preco < 150000 AND cd_vendedor != 2
+
