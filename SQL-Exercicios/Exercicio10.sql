@@ -195,3 +195,8 @@ VALUES
 SELECT cd_comprador, nm_comprador, ds_endereco
 FROM tb_comprador
 
+--Liste todas as linhas e os campos cd_Vendedor, nm_Vendedor e ds_Email da tabela VENDEDOR em ordem alfabética decrescente. 
+SELECT cd_vendedor, nm_vendedor, ds_endereco
+FROM tb_vendedor
+ORDER BY nm_vendedor DESC
+
