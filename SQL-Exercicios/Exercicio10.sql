@@ -200,3 +200,8 @@ SELECT cd_vendedor, nm_vendedor, ds_endereco
 FROM tb_vendedor
 ORDER BY nm_vendedor DESC
 
+--Liste as colunas cd_Imovel, cd_Vendedor e vl_Preco de todos os imóveis do vendedor 2
+SELECT cd_imovel, cd_vendedor, vl_preco
+FROM tb_imovel
+WHERE cd_vendedor = 2
+
