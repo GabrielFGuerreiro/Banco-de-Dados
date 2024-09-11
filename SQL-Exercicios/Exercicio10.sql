@@ -215,3 +215,11 @@ SELECT cd_imovel, cd_vendedor, vl_preco, sg_estado
 FROM tb_imovel
 WHERE vl_preco < 150000 AND cd_vendedor != 2
 
+--Liste as colunas cd_Comprador, nm_Comprador, ds_Endereco e sg_Estado da tabela COMPRADOR em que o Estado seja nulo.
+SELECT cd_comprador, nm_comprador, ds_endereco, sg_estado
+FROM tb_comprador
+WHERE NOT EXISTS (
+	SELECT 1
+	FROM tb_estado
+	WHERE tb_comprador.sg_estado = tb_estado.sg_estado)
+
