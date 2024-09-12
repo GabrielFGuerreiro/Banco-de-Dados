@@ -249,3 +249,6 @@ WHERE nm_vendedor LIKE 'M%'
 SELECT * FROM tb_vendedor
 WHERE nm_vendedor LIKE '_A%'
 
+--Liste todos os compradores que tenham a letra U em qualquer posição do endereço 
+SELECT * FROM tb_comprador
+WHERE ds_endereco LIKE '%[U]%'
