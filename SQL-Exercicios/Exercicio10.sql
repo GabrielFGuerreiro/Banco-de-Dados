@@ -235,3 +235,13 @@ WHERE dt_oferta >= '2009-01-01' AND dt_oferta <= '2009-03-01'
 --SELECT * FROM tb_oferta
 --WHERE dt_oferta >= CONVERT(DATE, '01/01/2009', 103) AND dt_oferta <= CONVERT(DATE, '01/03/2009', 103);
 
+--Liste todos os vendedores que comecem com a letra M.
+SELECT * FROM tb_vendedor
+WHERE nm_vendedor LIKE 'M%'
+
+--LIKE é usado para buscar registros de caracteres que correspondem a um padrão específico:
+--	%: Representa zero ou mais caracteres.
+--	_: Representa exatamente um caractere.
+--	[ ]: Define um intervalo ou uma lista de caracteres.
+--	[^]: Exclui caracteres (encontra qualquer caractere que não esteja na lista).
+
