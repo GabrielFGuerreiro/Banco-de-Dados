@@ -227,3 +227,11 @@ WHERE NOT EXISTS (
 SELECT * FROM tb_oferta
 WHERE vl_oferta > 100000 AND vl_oferta < 150000
 
+--Liste todas as ofertas cuja data da oferta esteja entre 01/01/2009 e 01/03/2009.
+SELECT * FROM tb_oferta
+WHERE dt_oferta >= '2009-01-01' AND dt_oferta <= '2009-03-01'
+
+--Outra forma usando o convert para o formato "DD/MM/AAAA". 103 é o estilo de formato DD/MM/YYYY
+--SELECT * FROM tb_oferta
+--WHERE dt_oferta >= CONVERT(DATE, '01/01/2009', 103) AND dt_oferta <= CONVERT(DATE, '01/03/2009', 103);
+
