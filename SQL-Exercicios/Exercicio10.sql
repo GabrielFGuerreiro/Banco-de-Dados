@@ -223,3 +223,7 @@ WHERE NOT EXISTS (
 	FROM tb_estado
 	WHERE tb_comprador.sg_estado = tb_estado.sg_estado)
 
+--Liste todas as ofertas cujo valor esteja entre 100 mil e 150 mil.
+SELECT * FROM tb_oferta
+WHERE vl_oferta > 100000 AND vl_oferta < 150000
+
