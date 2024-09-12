@@ -245,3 +245,7 @@ WHERE nm_vendedor LIKE 'M%'
 --	[ ]: Define um intervalo ou uma lista de caracteres.
 --	[^]: Exclui caracteres (encontra qualquer caractere que não esteja na lista).
 
+--Liste todos vendedores que tenham a letra A na segunda posição do nome
+SELECT * FROM tb_vendedor
+WHERE nm_vendedor LIKE '_A%'
+
