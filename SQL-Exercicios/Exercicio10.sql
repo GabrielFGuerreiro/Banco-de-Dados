@@ -283,3 +283,10 @@ SELECT MIN(vl_preco) FROM tb_imovel
 SELECT SUM (vl_preco) AS 'Total de Preços de Venda' FROM tb_imovel
 
 SELECT AVG(vl_preco) 'Valor Médio de Preços de Venda' FROM tb_imovel
+
+--Faça uma busca que retorne o total de ofertas realizadas nos anos de 2008, 2009 e 2010. 
+SELECT COUNT(*) FROM tb_oferta
+WHERE dt_oferta > '2008-01-01' AND dt_oferta < '2010-01-01'
+
+--SELECT COUNT(*) FROM tb_oferta --Outra forma usando o LIKE
+--WHERE dt_oferta LIKE '2008%' OR dt_oferta LIKE '2009%' OR  dt_oferta LIKE '2010%'
