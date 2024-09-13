@@ -258,3 +258,7 @@ SELECT * FROM tb_imovel
 WHERE cd_imovel = 2 OR cd_imovel = 3
 ORDER BY ds_endereco ASC
 
+--Liste todas as ofertas cujo imóvel seja 2 ou 3 e o valor da oferta seja maior que 140 mil, em ordem decrescente de data.
+SELECT * FROM tb_oferta
+WHERE (cd_imovel = 2 OR cd_imovel = 3) AND vl_oferta > 140000 --O operador AND tem maior precedência que o OR, então é preciso agrupar as condições com ()
+ORDER BY dt_oferta DESC
