@@ -274,3 +274,12 @@ SELECT MAX(vl_oferta) FROM tb_oferta
 SELECT MIN(vl_oferta) FROM tb_oferta
 
 SELECT AVG(vl_oferta) AS 'Valor Médio das Ofertas' FROM tb_oferta
+
+--Mostre o maior, o menor, o total e a média de preço de venda dos imóveis.
+SELECT MAX(vl_preco) FROM tb_imovel
+
+SELECT MIN(vl_preco) FROM tb_imovel
+
+SELECT SUM (vl_preco) AS 'Total de Preços de Venda' FROM tb_imovel
+
+SELECT AVG(vl_preco) 'Valor Médio de Preços de Venda' FROM tb_imovel
