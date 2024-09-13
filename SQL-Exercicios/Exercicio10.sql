@@ -262,3 +262,8 @@ ORDER BY ds_endereco ASC
 SELECT * FROM tb_oferta
 WHERE (cd_imovel = 2 OR cd_imovel = 3) AND vl_oferta > 140000 --O operador AND tem maior precedência que o OR, então é preciso agrupar as condições com ()
 ORDER BY dt_oferta DESC
+
+--Liste todos os imóveis cujo preço de venda esteja entre 110 mil e 200 mil ou seja do vendedor 4 em ordem crescente de área útil.
+SELECT * FROM tb_imovel
+WHERE vl_preco > 110000 AND vl_preco < 200000 OR cd_vendedor = 4
+ORDER BY qt_areaUtil ASC
