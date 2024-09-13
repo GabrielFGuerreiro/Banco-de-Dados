@@ -192,7 +192,7 @@ VALUES
 
 
 --Liste todas as linhas e os campos cd_Comprador, nm_Comprador e ds_Email da tabela COMPRADOR 
-SELECT cd_comprador, nm_comprador, ds_endereco
+SELECT cd_comprador, nm_comprador, ds_email
 FROM tb_comprador
 
 --Liste todas as linhas e os campos cd_Vendedor, nm_Vendedor e ds_Email da tabela VENDEDOR em ordem alfabética decrescente. 
