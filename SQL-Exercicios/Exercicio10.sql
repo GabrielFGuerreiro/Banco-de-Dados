@@ -267,3 +267,10 @@ ORDER BY dt_oferta DESC
 SELECT * FROM tb_imovel
 WHERE vl_preco > 110000 AND vl_preco < 200000 OR cd_vendedor = 4
 ORDER BY qt_areaUtil ASC
+
+--Verifique a maior, a menor e o valor médio das ofertas desta tabela.
+SELECT MAX(vl_oferta) FROM tb_oferta
+
+SELECT MIN(vl_oferta) FROM tb_oferta
+
+SELECT AVG(vl_oferta) AS 'Valor Médio das Ofertas' FROM tb_oferta
