@@ -252,3 +252,9 @@ WHERE nm_vendedor LIKE '_A%'
 --Liste todos os compradores que tenham a letra U em qualquer posição do endereço 
 SELECT * FROM tb_comprador
 WHERE ds_endereco LIKE '%[U]%'
+
+--Liste todos os imóveis cujo código seja 2 ou 3 em ordem alfabética de endereço.
+SELECT * FROM tb_imovel
+WHERE cd_imovel = 2 OR cd_imovel = 3
+ORDER BY ds_endereco ASC
+
