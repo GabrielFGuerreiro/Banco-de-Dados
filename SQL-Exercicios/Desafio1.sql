@@ -9,7 +9,6 @@ nm_cidadeEmpre CHAR (20),
 nm_estadoEmpre CHAR (2),
 cd_telefoneEmpre CHAR (11))
 
-
 CREATE TABLE tb_dependente(
 cd_empregado CHAR (8) NOT NULL,
 cd_dependente INT NOT NULL,
@@ -59,3 +58,9 @@ VALUES
 (1, 'Filho'),
 (2, 'Filha'),
 (99, 'Esposa');
+
+SELECT nm_empregado, dt_nasciEmpre, nm_dependente, nm_dependente FROM tb_empregado, tb_dependente
+where tb_empregado.cd_empregado = tb_dependente.cd_empregado
+4 – Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
+
+colunas -> nome empregado, data de nascimento do empregado, nome da esposa, nome dos filho e nome das filha.
