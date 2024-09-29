@@ -41,4 +41,21 @@ VALUES
 (8, "Empregado8", "1993-01-01", "Avenida Brasil, 555", "Cidade8", "RJ", "11912345678"),         --  20 ~ 34
 (9, "Empregado9", "1970-01-01", "Rua das Pedras, 89", "Cidade9", "SP", "11912345678");          --  >50
 
+INSERT INTO tb_dependente(cd_empregado, cd_dependente, nm_dependente, dt_nasciDepen, cd_grauParentesco)
+VALUES
+(1, 1, "Esposa1", "1975-01-01", 99), (1, 2, "Filho1", "2008-01-01", 2), (1, 3, "Filha1", "2005-01-01", 1),    --Empregado1
+(2, 1, "Esposa2", "1984-01-01", 99), (2, 2, "Filho2", "2013-01-01", 2), (2, 3, "Filha2", "2008-01-01", 1),    --Empregado2
+(3, 1, "Esposa3", "2002-01-01", 99), (3, 2, "Filho3", "2020-01-01", 2), (3, 3, "Filha3", "2018-01-01", 1),    --Empregado3
+(4, 1, "Esposa4", "1985-01-01", 99), (4, 2, "Filho4", "2014-01-01", 2), (4, 3, "Filha4", "2009-01-01", 1),    --Empregado4
+(5, 1, "Esposa5", "1974-01-01", 99), (5, 2, "Filho5", "2010-01-01", 2), (5, 3, "Filha5", "2006-01-01", 1),    --Empregado5
+(6, 1, "Esposa6", "1980-01-01", 99), (6, 2, "Filho6", "2015-01-01", 2), (6, 3, "Filha6", "2011-01-01", 1),    --Empregado6
+(7, 1, "Esposa7", "1999-01-01", 99), (7, 2, "Filho7", "2021-01-01", 2), (7, 3, "Filha7", "2015-01-01", 1),    --Empregado7
+(8, 1, "Esposa8", "1995-01-01", 99), (8, 2, "Filho8", "2022-01-01", 2), (8, 3, "Filha8", "2013-01-01", 1),    --Empregado8    
+(9, 1, "Esposa9", "1976-01-01", 99), (9, 2, "Filho9", "2015-01-01", 2), (9, 3, "Filha9", "2004-01-01", 1);    --Empregado9
+      --Esposas                              Filhos                             Filhas
 
+INSERT INTO tb_parentesco (cd_grauParentesco, nm_parentesco)
+VALUES
+(1, "Filho"),
+(2, "Filha"),
+(99, "Esposa");
