@@ -9,7 +9,6 @@ nm_cidadeEmpre CHAR (20),
 nm_estadoEmpre CHAR (2),
 cd_telefoneEmpre CHAR (11))
 
-
 CREATE TABLE tb_dependente(
 cd_empregado CHAR (8) NOT NULL,
 cd_dependente INT NOT NULL,
@@ -59,3 +58,37 @@ VALUES
 (1, 'Filho'),
 (2, 'Filha'),
 (99, 'Esposa');
+
+SELECT DISTINCT
+    e.nm_empregado AS "Nome Empregado", 
+    e.dt_nasciEmpre AS "Data de Nascimento", 
+    d1.nm_dependente AS "Nome da Esposa", 
+    d2.nm_dependente AS "Nome do Filho", 
+    d3.nm_dependente AS "Nome da Filha"
+FROM 
+    tb_empregado e, 
+    tb_dependente d1,   -- Apelido para esposa
+    tb_dependente d2,   -- Apelido para filho
+    tb_dependente d3    -- Apelido para filha
+WHERE 
+    e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99  -- Esposa
+    AND e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2  -- Filho
+    AND e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  -- Filha
+
+--Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
+--colunas -> nome empregado, data de nascimento do empregado, nome da esposa, nome dos filho e nome das filha.
+
+SELECT 
+    e.nm_empregado AS "Nome Empregado", 
+    e.dt_nasciEmpre AS "Data de Nascimento do Empregado", 
+    d1.nm_dependente AS "Nome da Esposa", 
+    d2.nm_dependente AS "Nome do Filho", 
+    d3.nm_dependente AS "Nome da Filha"
+FROM 
+    tb_empregado e       
+JOIN 
+    tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99  --Esposa
+JOIN 
+    tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2   --Filho
+JOIN 
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
