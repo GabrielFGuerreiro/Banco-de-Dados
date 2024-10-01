@@ -320,7 +320,9 @@ SELECT
 FROM
     tb_imovel INNER JOIN tb_bairro
 ON
-    tb_imovel.cd_bairro = tb_bairro.cd_bairro
+    tb_imovel.cd_bairro = tb_bairro.cd_bairro --A tabela bairro possuir um chave composta (cd_bairro, cd_cidade, sg_estado).
+    AND tb_imovel.cd_cidade = tb_bairro.cd_cidade --Essa consulta irá retornar registros da tabela tb_imovel e da tabela tb_bairro
+    AND tb_imovel.sg_estado = tb_bairro.sg_estado --onde todas as três condições de junção são verdadeiras.
 WHERE
     tb_imovel.cd_vendedor = 3;
 
@@ -352,7 +354,20 @@ ON
     tb_comprador.cd_comprador = tb_oferta.cd_comprador
 
 --7. Faça a mesma busca, porém acrescentando os compradores que ainda não fizeram ofertas para os imóveis.
+SELECT
+    tb_comprador.cd_comprador AS 'Código comprador',
+    nm_comprador AS 'Nome comprador',
+    vl_oferta AS 'Valor oferta'
+FROM
+    tb_comprador LEFT JOIN tb_oferta
+ON
+    tb_comprador.cd_comprador = tb_oferta.cd_comprador
+
 --8. Faça uma busca que mostre o endereço do imóvel, o bairro e nível de preço do imóvel.
+
+
+
+
 --9. Faça uma busca que retorne o total de imóveis por nome de vendedor. Apresente em ordem de total de imóveis.
 --10. Verifique a diferença de preços entre o maior e o menor imóvel da tabela.
 --11. Mostre o código do vendedor e o menor preço de imóvel dele no cadastro. Exclua da busca os valores de imóveis inferiores a 10 mil.
