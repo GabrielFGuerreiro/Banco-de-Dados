@@ -314,14 +314,15 @@ ON
 
 --3. Faça uma busca que mostre cd_Imovel, vl_Imovel e nm_Bairro, cujo código do vendedor seja 3.
 SELECT
-    cd_imovel,
-    vl_preco,
-    nm_bairro
+    cd_imovel AS 'Código imóvel',
+    vl_preco AS 'Preço',
+    nm_bairro AS 'Nome bairro'
 FROM
-    tb_imovel,
-    tb_bairro
+    tb_imovel INNER JOIN tb_bairro
+ON
+    tb_imovel.cd_bairro = tb_bairro.cd_bairro
 WHERE
-    tb_imovel.cd_bairro = tb_bairro.cd_bairro AND cd_vendedor = 3
+    tb_imovel.cd_vendedor = 3;
 
 --4. Faça uma busca que mostre todos os imóveis que tenham ofertas cadastradas.
 SELECT DISTINCT --Disctinct remove duplicações
