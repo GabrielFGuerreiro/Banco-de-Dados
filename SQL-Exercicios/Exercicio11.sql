@@ -290,15 +290,15 @@ WHERE dt_oferta >= '2008-01-01' AND dt_oferta < '2011-01-01'
 
 
 --1. Faça uma busca que mostre cd_Imovel, cd_Vendedor, nm_Vendedor e sg_Estado.
+
 SELECT
     cd_imovel AS 'Código imóvel',
     tb_imovel.cd_vendedor AS 'Código vendedor',
     nm_vendedor AS 'Nome vendedor',
     tb_imovel.sg_estado 'Estado'
 FROM
-    tb_vendedor,
-    tb_imovel
-WHERE
+    tb_vendedor INNER JOIN tb_imovel
+ON
     tb_imovel.cd_vendedor = tb_vendedor.cd_vendedor;
 
 --2. Faça uma busca que mostre cd_Comprador, nm_Comprador, cd_Imovel e vl_Oferta.
@@ -324,10 +324,26 @@ FROM
 WHERE
     tb_imovel.cd_bairro = tb_bairro.cd_bairro AND cd_vendedor = 3
 
-
-   
 --4. Faça uma busca que mostre todos os imóveis que tenham ofertas cadastradas.
+SELECT DISTINCT --Disctinct remove duplicações
+    tb_imovel.cd_imovel AS 'Imóveis com ofertas cadastradas'
+FROM
+    tb_imovel,
+    tb_oferta
+WHERE
+    tb_imovel.cd_imovel = tb_oferta.cd_imovel --Filtra os imóveis de forma implícita 
+
 --5. Faça uma busca que mostre todos os imóveis e ofertas mesmo que não haja ofertas cadastradas para o imóvel.
+SELECT
+    tb_imovel.cd_imovel,
+    vl_oferta
+FROM
+    tb_imovel
+    LEFT OUTER JOIN tb_oferta ON tb_imovel.cd_imovel = tb_oferta.cd_imovel;
+
+select * from tb_imovel
+select * from tb_oferta
+
 --6. Faça uma busca que mostre os compradores e as respectivas ofertas realizadas por eles.
 --7. Faça a mesma busca, porém acrescentando os compradores que ainda não fizeram ofertas para os imóveis.
 --8. Faça uma busca que mostre o endereço do imóvel, o bairro e nível de preço do imóvel.
