@@ -303,14 +303,13 @@ ON
 
 --2. Faça uma busca que mostre cd_Comprador, nm_Comprador, cd_Imovel e vl_Oferta.
 SELECT
-    tb_comprador.cd_comprador,
-    nm_comprador,
-    cd_imovel,
-    vl_oferta
+    tb_comprador.cd_comprador AS 'Código comprador',
+    nm_comprador AS 'Nome comprador',
+    cd_imovel AS 'Código imóvel',
+    vl_oferta AS 'Oferta'
 FROM
-    tb_comprador,
-    tb_oferta
-WHERE
+    tb_comprador INNER JOIN tb_oferta
+ON
     tb_comprador.cd_comprador = tb_oferta.cd_comprador;
 
 --3. Faça uma busca que mostre cd_Imovel, vl_Imovel e nm_Bairro, cujo código do vendedor seja 3.
