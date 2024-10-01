@@ -328,23 +328,29 @@ WHERE
 SELECT DISTINCT --Disctinct remove duplicações
     tb_imovel.cd_imovel AS 'Imóveis com ofertas cadastradas'
 FROM
-    tb_imovel,
-    tb_oferta
-WHERE
+    tb_imovel INNER JOIN tb_oferta
+ON
     tb_imovel.cd_imovel = tb_oferta.cd_imovel --Filtra os imóveis de forma implícita 
 
 --5. Faça uma busca que mostre todos os imóveis e ofertas mesmo que não haja ofertas cadastradas para o imóvel.
 SELECT
     tb_imovel.cd_imovel,
     vl_oferta
-FROM
-    tb_imovel
-    LEFT OUTER JOIN tb_oferta ON tb_imovel.cd_imovel = tb_oferta.cd_imovel;
-
-select * from tb_imovel
-select * from tb_oferta
+FROM        
+    tb_imovel LEFT OUTER JOIN tb_oferta --Pega os valores da intersecção (imóveis com oferta) e os fora
+ON                                      --da intersecção, mas apenas da tabela esquerda (tb_imovel)
+    tb_imovel.cd_imovel = tb_oferta.cd_imovel;
 
 --6. Faça uma busca que mostre os compradores e as respectivas ofertas realizadas por eles.
+SELECT
+    tb_comprador.cd_comprador AS 'Código comprador',
+    nm_comprador AS 'Nome comprador',
+    vl_oferta AS 'Valor oferta'
+FROM
+    tb_comprador INNER JOIN tb_oferta
+ON
+    tb_comprador.cd_comprador = tb_oferta.cd_comprador
+
 --7. Faça a mesma busca, porém acrescentando os compradores que ainda não fizeram ofertas para os imóveis.
 --8. Faça uma busca que mostre o endereço do imóvel, o bairro e nível de preço do imóvel.
 --9. Faça uma busca que retorne o total de imóveis por nome de vendedor. Apresente em ordem de total de imóveis.
