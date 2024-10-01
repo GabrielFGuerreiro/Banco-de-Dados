@@ -364,11 +364,36 @@ ON
     tb_comprador.cd_comprador = tb_oferta.cd_comprador
 
 --8. Faça uma busca que mostre o endereço do imóvel, o bairro e nível de preço do imóvel.
-
-
-
+-- SELECT
+--     cd_imovel,
+--     ds_endereco AS 'Endereço do imóvel',
+--     nm_bairro AS 'Bairro',
+--     nm_faixa
+-- FROM
+--     tb_imovel
+-- INNER JOIN tb_bairro ON
+--     tb_imovel.cd_bairro = tb_bairro.cd_bairro
+--     AND tb_imovel.cd_cidade = tb_bairro.cd_cidade
+--     AND tb_imovel.sg_estado = tb_bairro.sg_estado
+-- INNER JOIN tb_faixaImovel ON
+       --tb_imovel.vl_preco BETWEEN tb_faixaImovel.vl_minimo AND tb_faixaImovel.vl_maximo;
 
 --9. Faça uma busca que retorne o total de imóveis por nome de vendedor. Apresente em ordem de total de imóveis.
+SELECT
+    COUNT(cd_imovel) AS 'Quantidade de imóveis',
+    nm_vendedor AS 'Nome vendedor'
+FROM 
+    tb_imovel INNER JOIN tb_vendedor
+ON
+    tb_imovel.cd_vendedor = tb_vendedor.cd_vendedor
+GROUP BY
+    nm_vendedor
+
 --10. Verifique a diferença de preços entre o maior e o menor imóvel da tabela.
+SELECT
+    MAX(vl_preco) - MIN(vl_preco)
+FROM
+    tb_imovel
+
 --11. Mostre o código do vendedor e o menor preço de imóvel dele no cadastro. Exclua da busca os valores de imóveis inferiores a 10 mil.
 --12. Mostre o código e o nome do comprador e a média do valor das ofertas e o número de ofertas deste comprador.
