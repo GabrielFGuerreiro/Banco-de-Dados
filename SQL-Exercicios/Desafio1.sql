@@ -9,6 +9,10 @@ nm_cidadeEmpre CHAR (20),
 nm_estadoEmpre CHAR (2),
 cd_telefoneEmpre CHAR (11))
 
+CREATE TABLE tb_parentesco(
+cd_grauParentesco INT NOT NULL,
+nm_parentesco CHAR (25))
+
 CREATE TABLE tb_dependente(
 cd_empregado CHAR (8) NOT NULL,
 cd_dependente INT NOT NULL,
@@ -16,13 +20,10 @@ nm_dependente CHAR (30),
 dt_nasciDepen DATE,
 cd_grauParentesco int)
 
-CREATE TABLE tb_parentesco(
-cd_grauParentesco INT NOT NULL,
-nm_parentesco CHAR (25))
 
 ALTER TABLE tb_empregado ADD PRIMARY KEY (cd_empregado)
 ALTER TABLE tb_dependente ADD PRIMARY KEY (cd_empregado, cd_dependente)
-ALTER TABLE tb_parentesco ADD PRIMARY KEY (cd_parentesco)
+ALTER TABLE tb_parentesco ADD PRIMARY KEY (cd_grauParentesco)
 
 ALTER TABLE tb_dependente ADD FOREIGN KEY (cd_empregado) REFERENCES tb_empregado (cd_empregado)
 ALTER TABLE tb_dependente ADD FOREIGN KEY (cd_grauParentesco) REFERENCES tb_parentesco (cd_grauParentesco)
@@ -40,6 +41,12 @@ VALUES
 ('8', 'Empregado8', '1993-01-01', 'Avenida Brasil, 555', 'Cidade8', 'RJ', '11912345678'),         --  20 ~ 34
 ('9', 'Empregado9', '1970-01-01', 'Rua das Pedras, 89', 'Cidade9', 'SP', '11912345678');          --  >50
 
+INSERT INTO tb_parentesco (cd_grauParentesco, nm_parentesco)
+VALUES
+(1, 'Filho'),
+(2, 'Filha'),
+(99, 'Esposa');
+
 INSERT INTO tb_dependente(cd_empregado, cd_dependente, nm_dependente, dt_nasciDepen, cd_grauParentesco)
 VALUES
 ('1', 1, 'Esposa1', '1975-01-01', 99), ('1', 2, 'Filho1', '2008-01-01', 2), ('1', 3, 'Filha1', '2005-01-01', 1),    --Empregado1
@@ -52,12 +59,6 @@ VALUES
 ('8', 1, 'Esposa8', '1995-01-01', 99), ('8', 2, 'Filho8', '2022-01-01', 2), ('8', 3, 'Filha8', '2013-01-01', 1),    --Empregado8    
 ('9', 1, 'Esposa9', '1976-01-01', 99), ('9', 2, 'Filho9', '2015-01-01', 2), ('9', 3, 'Filha9', '2004-01-01', 1);    --Empregado9
       --Esposas                              Filhos                             Filhas
-
-INSERT INTO tb_parentesco (cd_grauParentesco, nm_parentesco)
-VALUES
-(1, 'Filho'),
-(2, 'Filha'),
-(99, 'Esposa');
 
 SELECT DISTINCT
     e.nm_empregado AS "Nome Empregado", 
