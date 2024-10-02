@@ -78,8 +78,8 @@ WHERE
 --Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
 --colunas -> nome empregado, data de nascimento do empregado, nome da esposa, nome dos filho e nome das filha.
 
-SELECT 
-    e.nm_empregado AS "Nome Empregado", 
+SELECT DISTINCT
+    e.nm_empregado AS "Nome do Empregado", 
     e.dt_nasciEmpre AS "Data de Nascimento do Empregado", 
     d1.nm_dependente AS "Nome da Esposa", 
     d2.nm_dependente AS "Nome do Filho", 
