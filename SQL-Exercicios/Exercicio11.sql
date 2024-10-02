@@ -40,7 +40,7 @@ SELECT DISTINCT --Disctinct remove duplicações
 FROM
     tb_imovel INNER JOIN tb_oferta
 ON
-    tb_imovel.cd_imovel = tb_oferta.cd_imovel --Filtra os imóveis de forma implícita 
+    tb_imovel.cd_imovel = tb_oferta.cd_imovel; --Filtra os imóveis de forma implícita 
 
 --5. Faça uma busca que mostre todos os imóveis e ofertas mesmo que não haja ofertas cadastradas para o imóvel.
 SELECT
@@ -59,7 +59,7 @@ SELECT
 FROM
     tb_comprador INNER JOIN tb_oferta
 ON
-    tb_comprador.cd_comprador = tb_oferta.cd_comprador
+    tb_comprador.cd_comprador = tb_oferta.cd_comprador;
 
 --7. Faça a mesma busca, porém acrescentando os compradores que ainda não fizeram ofertas para os imóveis.
 SELECT
@@ -69,22 +69,21 @@ SELECT
 FROM
     tb_comprador LEFT JOIN tb_oferta
 ON
-    tb_comprador.cd_comprador = tb_oferta.cd_comprador
+    tb_comprador.cd_comprador = tb_oferta.cd_comprador;
 
 --8. Faça uma busca que mostre o endereço do imóvel, o bairro e nível de preço do imóvel.
--- SELECT
---     cd_imovel,
---     ds_endereco AS 'Endereço do imóvel',
---     nm_bairro AS 'Bairro',
---     nm_faixa
--- FROM
---     tb_imovel
--- INNER JOIN tb_bairro ON
---     tb_imovel.cd_bairro = tb_bairro.cd_bairro
---     AND tb_imovel.cd_cidade = tb_bairro.cd_cidade
---     AND tb_imovel.sg_estado = tb_bairro.sg_estado
--- INNER JOIN tb_faixaImovel ON
-       --tb_imovel.vl_preco BETWEEN tb_faixaImovel.vl_minimo AND tb_faixaImovel.vl_maximo;
+SELECT
+    ds_endereco AS 'Endereço do imóvel',
+    nm_bairro AS 'Bairro',
+    nm_faixa AS 'Nível de preço'
+FROM
+    tb_imovel
+INNER JOIN tb_bairro ON
+    tb_imovel.cd_bairro = tb_bairro.cd_bairro
+    AND tb_imovel.cd_cidade = tb_bairro.cd_cidade
+    AND tb_imovel.sg_estado = tb_bairro.sg_estado
+INNER JOIN tb_faixaImovel ON
+       tb_imovel.vl_preco >= tb_faixaImovel.vl_minimo AND tb_imovel.vl_preco <= tb_faixaImovel.vl_maximo;
 
 --9. Faça uma busca que retorne o total de imóveis por nome de vendedor. Apresente em ordem de total de imóveis.
 SELECT
@@ -95,13 +94,38 @@ FROM
 ON
     tb_imovel.cd_vendedor = tb_vendedor.cd_vendedor
 GROUP BY
-    nm_vendedor
+    nm_vendedor;
 
 --10. Verifique a diferença de preços entre o maior e o menor imóvel da tabela.
 SELECT
     MAX(vl_preco) - MIN(vl_preco)
 FROM
-    tb_imovel
+    tb_imovel;
 
 --11. Mostre o código do vendedor e o menor preço de imóvel dele no cadastro. Exclua da busca os valores de imóveis inferiores a 10 mil.
+SELECT
+    tb_vendedor.cd_vendedor AS 'Código vendedor',
+    MIN(vl_preco) AS 'Menor preço de imóvel'
+FROM
+    tb_imovel INNER JOIN tb_vendedor
+ON
+    tb_imovel.cd_vendedor = tb_vendedor.cd_vendedor
+WHERE
+    vl_preco > 10000
+GROUP BY
+    tb_vendedor.cd_vendedor;
+
 --12. Mostre o código e o nome do comprador e a média do valor das ofertas e o número de ofertas deste comprador.
+SELECT 
+    tb_comprador.cd_comprador AS 'Código comprador',
+    nm_comprador AS 'Nome comprador',
+    AVG(vl_oferta) AS 'Média ofertas',
+    COUNT(vl_oferta) AS 'Quantidade ofertas'
+FROM
+    tb_comprador INNER JOIN tb_oferta
+ON
+    tb_comprador.cd_comprador = tb_oferta.cd_comprador
+GROUP BY
+    tb_comprador.cd_comprador,
+    nm_comprador
+select * from tb_oferta
