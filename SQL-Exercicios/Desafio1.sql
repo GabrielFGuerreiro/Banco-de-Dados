@@ -43,8 +43,8 @@ VALUES
 
 INSERT INTO tb_parentesco (cd_grauParentesco, nm_parentesco)
 VALUES
-(1, 'Filho'),
-(2, 'Filha'),
+(1, 'Filha'),
+(2, 'Filho'),
 (99, 'Esposa');
 
 INSERT INTO tb_dependente(cd_empregado, cd_dependente, nm_dependente, dt_nasciDepen, cd_grauParentesco)
@@ -113,3 +113,24 @@ JOIN
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2   --Filho
 JOIN 
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
+
+--Escreva uma query para mostrar os empregados entre 35 e 49 anos e seus filhos/filhas < de
+--12 anos com as seguintes colunas:
+--colunas -> nome empregado, data nascimento empregado, nome do filho, data de
+--nascimento do filho, nome da filha, data nascimento da filha.
+SELECT 
+    nm_empregado AS 'Nome do empregado',
+    dt_nasciEmpre AS 'Data de nascimento do empregado',
+    d2.nm_dependente AS 'Nome do filho',
+    d2.dt_nasciDepen AS 'Data de nascimento do filho',
+    d1.nm_dependente AS 'Nome da filha',
+    d1.dt_nasciDepen AS 'Data de nascimento da filha'
+FROM
+    tb_empregado e
+JOIN 
+    tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 1 AND d1.dt_nasciDepen >= '2012-01-01' --Filha
+JOIN 
+    tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen >= '2012-01-01'--Filho
+WHERE
+    dt_nasciEmpre >= '1975-01-01' AND dt_nasciEmpre <= '1989-01-01'
+    select * from tb_dependente
