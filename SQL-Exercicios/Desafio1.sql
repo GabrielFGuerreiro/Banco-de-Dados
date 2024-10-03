@@ -99,12 +99,12 @@ JOIN
 --colunas -> nome empregado, nome da esposa, nome do filho, data de nascimento, nome da
 --filha, data de nascimento
 SELECT
-    nm_empregado,
+    nm_empregado AS 'Nome do empregado',
     d1.nm_dependente AS "Nome da Esposa", 
     d2.nm_dependente AS "Nome do Filho", 
-    d2.dt_nasciDepen,
+    d2.dt_nasciDepen AS 'Data de nascimento do filho',
     d3.nm_dependente AS "Nome da Filha",
-    d3.dt_nasciDepen
+    d3.dt_nasciDepen AS 'Data de nascimento da filha'
 FROM 
     tb_empregado e       
 JOIN 
@@ -113,5 +113,3 @@ JOIN
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2   --Filho
 JOIN 
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
-
-    select * from tb_dependente
