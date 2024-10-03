@@ -93,3 +93,25 @@ JOIN
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2   --Filho
 JOIN 
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
+
+
+-- Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
+--colunas -> nome empregado, nome da esposa, nome do filho, data de nascimento, nome da
+--filha, data de nascimento
+SELECT
+    nm_empregado,
+    d1.nm_dependente AS "Nome da Esposa", 
+    d2.nm_dependente AS "Nome do Filho", 
+    d2.dt_nasciDepen,
+    d3.nm_dependente AS "Nome da Filha",
+    d3.dt_nasciDepen
+FROM 
+    tb_empregado e       
+JOIN 
+    tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99  --Esposa
+JOIN 
+    tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2   --Filho
+JOIN 
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
+
+    select * from tb_dependente
