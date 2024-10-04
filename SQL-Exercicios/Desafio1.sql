@@ -60,25 +60,9 @@ VALUES
 ('9', 1, 'Esposa9', '1976-01-01', 99), ('9', 2, 'Filho9', '2015-01-01', 2), ('9', 3, 'Filha9', '2004-01-01', 1);    --Empregado9
       --Esposas                              Filhos                             Filhas
 
-SELECT DISTINCT
-    e.nm_empregado AS "Nome Empregado", 
-    e.dt_nasciEmpre AS "Data de Nascimento", 
-    d1.nm_dependente AS "Nome da Esposa", 
-    d2.nm_dependente AS "Nome do Filho", 
-    d3.nm_dependente AS "Nome da Filha"
-FROM 
-    tb_empregado e, 
-    tb_dependente d1,   -- Apelido para esposa
-    tb_dependente d2,   -- Apelido para filho
-    tb_dependente d3    -- Apelido para filha
-WHERE 
-    e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99  -- Esposa
-    AND e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2  -- Filho
-    AND e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  -- Filha
 
---Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
+--1.Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
 --colunas -> nome empregado, data de nascimento do empregado, nome da esposa, nome dos filho e nome das filha.
-
 SELECT DISTINCT
     e.nm_empregado AS "Nome do Empregado", 
     e.dt_nasciEmpre AS "Data de Nascimento do Empregado", 
@@ -95,7 +79,7 @@ JOIN
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
 
 
--- Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
+--2.Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
 --colunas -> nome empregado, nome da esposa, nome do filho, data de nascimento, nome da
 --filha, data de nascimento
 SELECT
@@ -114,7 +98,7 @@ JOIN
 JOIN 
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1;  --Filha
 
---Escreva uma query para mostrar os empregados entre 35 e 49 anos e seus filhos/filhas < de
+--3.Escreva uma query para mostrar os empregados entre 35 e 49 anos e seus filhos/filhas < de
 --12 anos com as seguintes colunas:
 --colunas -> nome empregado, data nascimento empregado, nome do filho, data de
 --nascimento do filho, nome da filha, data nascimento da filha.
@@ -135,7 +119,7 @@ WHERE
     dt_nasciEmpre >= '1975-01-01' AND dt_nasciEmpre <= '1989-01-01'
 
 
---Escreva uma query para mostrar os empregados com as esposas entre 20 e 32 anos e seus
+--4.Escreva uma query para mostrar os empregados com as esposas entre 20 e 32 anos e seus
 --filhos/filhas > 5 anos numa tabela com as seguintes colunas:
 --colunas -> nome empregado, nome esposa, data nascimento esposa, nome do filho, data de
 --nascimento do filho, nome da filha, data nascimento da filha.
@@ -156,5 +140,26 @@ JOIN
 JOIN
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2019-01-01'
 
+--5.Escreva uma query para mostrar os empregados com as esposas > 47 anos e seus filhos/
+--filhas > 17 numa tabela com as seguintes colunas:
+--colunas -> nome empregado, nome esposa, data nascimento esposa, nome do filho, data de
+--nascimento do filho, nome da filha, data nascimento da filha.
+SELECT 
+    nm_empregado AS 'Nome do empregado',
+    d1.nm_dependente AS 'Nome da esposa',
+    d1.dt_nasciDepen AS 'Data de nascimento da esposa',
+    d2.nm_dependente AS 'Nome do filho',
+    d2.dt_nasciDepen AS 'Data de nascimento do filho',
+    d3.nm_dependente AS 'Nome da filha',
+    d3.dt_nasciDepen AS 'Data de nascimento da filha'
+FROM
+    tb_empregado e
+JOIN
+    tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99 AND d1.dt_nasciDepen <= '1977-01-01'
+JOIN
+    tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen <= '2007-01-01'
+JOIN
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2007-01-01'
 
-    select * from tb_dependente
+
+    
