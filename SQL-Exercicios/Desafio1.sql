@@ -183,4 +183,24 @@ JOIN
 WHERE
     nm_estadoEmpre = 'SP'
 
- 
+--7.Escreva uma query para mostrar as cidades do estado de ‘RJ’ com as seguintes colunas:
+--colunas -> nome empregado, nome da esposa, nome do filho, data de nascimento do filho
+--nome da filha, data de nascimento da filha e cidade.
+SELECT 
+    nm_empregado AS 'Nome do empregado',
+    d1.nm_dependente AS 'Nome da esposa',
+    d2.nm_dependente AS 'Nome do filho',
+    d2.dt_nasciDepen AS 'Data de nascimento do filho',
+    d3.nm_dependente AS 'Nome da filha',
+    d3.dt_nasciDepen AS 'Data de nascimento da filha',
+    nm_cidadeEmpre AS 'Cidade'
+FROM
+    tb_empregado e
+JOIN
+    tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99
+JOIN
+    tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2
+JOIN
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1
+WHERE
+    nm_estadoEmpre = 'RJ'
