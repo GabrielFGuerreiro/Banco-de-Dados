@@ -133,4 +133,28 @@ JOIN
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen >= '2012-01-01'--Filho
 WHERE
     dt_nasciEmpre >= '1975-01-01' AND dt_nasciEmpre <= '1989-01-01'
+
+
+--Escreva uma query para mostrar os empregados com as esposas entre 20 e 32 anos e seus
+--filhos/filhas > 5 anos numa tabela com as seguintes colunas:
+--colunas -> nome empregado, nome esposa, data nascimento esposa, nome do filho, data de
+--nascimento do filho, nome da filha, data nascimento da filha.
+SELECT 
+    nm_empregado AS 'Nome do empregado',
+    d1.nm_dependente AS 'Nome da esposa',
+    d1.dt_nasciDepen AS 'Data de nascimento da esposa',
+    d2.nm_dependente AS 'Nome do filho',
+    d2.dt_nasciDepen AS 'Data de nascimento do filho',
+    d3.nm_dependente AS 'Nome da filha',
+    d3.dt_nasciDepen AS 'Data de nascimento da filha'
+FROM
+    tb_empregado e
+JOIN
+    tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99 AND d1.dt_nasciDepen >= '1992-01-01' AND d1.dt_nasciDepen <= '2004-01-01'
+JOIN
+    tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen <= '2019-01-01'
+JOIN
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2019-01-01'
+
+
     select * from tb_dependente
