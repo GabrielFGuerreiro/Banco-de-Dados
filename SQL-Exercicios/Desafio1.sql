@@ -142,10 +142,10 @@ FROM
     tb_empregado e
 JOIN
     tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99 AND d1.dt_nasciDepen >= '1992-01-01' AND d1.dt_nasciDepen <= '2004-01-01'
-JOIN
+LEFT JOIN
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen <= '2019-01-01'
 JOIN
-    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2019-01-01'
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2019-01-01';
 
 --5.Escreva uma query para mostrar os empregados com as esposas > 47 anos e seus filhos/
 --filhas > 17 numa tabela com as seguintes colunas:
