@@ -118,12 +118,12 @@ SELECT
     d1.dt_nasciDepen AS 'Data de nascimento da filha'
 FROM
     tb_empregado e
-JOIN 
+LEFT JOIN 
     tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 1 AND d1.dt_nasciDepen >= '2012-01-01' --Filha
 JOIN 
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen >= '2012-01-01'--Filho
 WHERE
-    dt_nasciEmpre >= '1975-01-01' AND dt_nasciEmpre <= '1989-01-01'
+    dt_nasciEmpre >= '1975-01-01' AND dt_nasciEmpre <= '1989-01-01';
 
 
 --4.Escreva uma query para mostrar os empregados com as esposas entre 20 e 32 anos e seus
