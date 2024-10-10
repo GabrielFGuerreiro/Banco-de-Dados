@@ -163,10 +163,10 @@ FROM
     tb_empregado e
 JOIN
     tb_dependente d1 ON e.cd_empregado = d1.cd_empregado AND d1.cd_grauParentesco = 99 AND d1.dt_nasciDepen <= '1977-01-01'
-JOIN
+LEFT JOIN
     tb_dependente d2 ON e.cd_empregado = d2.cd_empregado AND d2.cd_grauParentesco = 2 AND d2.dt_nasciDepen <= '2007-01-01'
 JOIN
-    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2007-01-01'
+    tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1 AND d3.dt_nasciDepen <= '2007-01-01';
 
 --6.Escreva uma query para mostras os filhos que moram no estado de ‘SP’ com as seguinte colunas:
 --colunas -> nome empregado, nome da esposa, nome do filho e data de nascimento do filho,
