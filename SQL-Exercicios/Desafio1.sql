@@ -20,14 +20,21 @@ nm_dependente CHAR (30),
 dt_nasciDepen DATE,
 cd_grauParentesco int)
 
+--PK
+ALTER TABLE tb_empregado ADD CONSTRAINT tb_empregado_pk PRIMARY KEY (cd_empregado);
+ALTER TABLE tb_dependente ADD CONSTRAINT tb_dependente_pk PRIMARY KEY (cd_empregado, cd_dependente);
+ALTER TABLE tb_parentesco ADD CONSTRAINT tb_parentesco_pk PRIMARY KEY (cd_grauParentesco);
 
-ALTER TABLE tb_empregado ADD PRIMARY KEY (cd_empregado)
-ALTER TABLE tb_dependente ADD PRIMARY KEY (cd_empregado, cd_dependente)
-ALTER TABLE tb_parentesco ADD PRIMARY KEY (cd_grauParentesco)
+--FK
+ALTER TABLE tb_dependente
+    ADD CONSTRAINT tb_dependente_fk_empre
+    FOREIGN KEY (cd_empregado)
+    REFERENCES tb_empregado (cd_empregado);
 
-ALTER TABLE tb_dependente ADD FOREIGN KEY (cd_empregado) REFERENCES tb_empregado (cd_empregado)
-ALTER TABLE tb_dependente ADD FOREIGN KEY (cd_grauParentesco) REFERENCES tb_parentesco (cd_grauParentesco)
-
+ALTER TABLE tb_dependente
+    ADD CONSTRAINT tb_dependente_fk_graupar
+    FOREIGN KEY (cd_grauParentesco)
+    REFERENCES tb_parentesco (cd_grauParentesco);
 
 INSERT INTO tb_empregado(cd_empregado, nm_empregado, dt_nasciEmpre, ds_enderecoEmpre, nm_cidadeEmpre, nm_estadoEmpre, cd_telefoneEmpre)
 VALUES
@@ -64,11 +71,11 @@ VALUES
 --1.Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
 --colunas -> nome empregado, data de nascimento do empregado, nome da esposa, nome dos filho e nome das filha.
 SELECT DISTINCT
-    e.nm_empregado AS "Nome do Empregado", 
-    e.dt_nasciEmpre AS "Data de Nascimento do Empregado", 
-    d1.nm_dependente AS "Nome da Esposa", 
-    d2.nm_dependente AS "Nome do Filho", 
-    d3.nm_dependente AS "Nome da Filha"
+    e.nm_empregado AS 'Nome do Empregado', 
+    e.dt_nasciEmpre AS 'Data de Nascimento do Empregado', 
+    d1.nm_dependente AS 'Nome da Esposa', 
+    d2.nm_dependente AS 'Nome do Filho', 
+    d3.nm_dependente AS 'Nome da Filha'
 FROM 
     tb_empregado e       
 JOIN 
@@ -84,10 +91,10 @@ JOIN
 --filha, data de nascimento
 SELECT
     nm_empregado AS 'Nome do empregado',
-    d1.nm_dependente AS "Nome da Esposa", 
-    d2.nm_dependente AS "Nome do Filho", 
+    d1.nm_dependente AS 'Nome da Esposa', 
+    d2.nm_dependente AS 'Nome do Filho', 
     d2.dt_nasciDepen AS 'Data de nascimento do filho',
-    d3.nm_dependente AS "Nome da Filha",
+    d3.nm_dependente AS 'Nome da Filha',
     d3.dt_nasciDepen AS 'Data de nascimento da filha'
 FROM 
     tb_empregado e       
