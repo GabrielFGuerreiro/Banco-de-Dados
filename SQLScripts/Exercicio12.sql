@@ -25,3 +25,16 @@ WHERE
         SELECT avg(vl_preco)
         FROM tb_imovel
     );
+
+--3. Faça uma lista com todos os compradores que tenham ofertas cadastradas com o valor superior a 70 mil.
+SELECT
+    nm_comprador,
+    vl_oferta
+FROM
+    tb_comprador c
+JOIN
+    tb_oferta o ON c.cd_comprador = o.cd_comprador
+WHERE
+    vl_oferta > 70000
+    select * from tb_comprador
+    select * from tb_oferta
