@@ -35,6 +35,17 @@ FROM
 JOIN
     tb_oferta o ON c.cd_comprador = o.cd_comprador
 WHERE
-    vl_oferta > 70000
-    select * from tb_comprador
-    select * from tb_oferta
+    vl_oferta > 70000;
+
+--4.Faça uma lista com todos os imóveis com oferta superior à média do valor das Ofertas.
+SELECT
+    i.cd_imovel
+FROM
+    tb_imovel i
+JOIN
+    tb_oferta o ON i.cd_imovel = o.cd_imovel
+WHERE
+    vl_oferta >(
+        select avg(vl_oferta)
+        from tb_oferta
+    );
