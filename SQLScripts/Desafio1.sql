@@ -18,7 +18,7 @@ cd_empregado CHAR (8) NOT NULL,
 cd_dependente INT NOT NULL,
 nm_dependente CHAR (30),
 dt_nasciDepen DATE,
-cd_grauParentesco int)
+cd_grauParentesco INT)
 
 --PK
 ALTER TABLE tb_empregado ADD CONSTRAINT tb_empregado_pk PRIMARY KEY (cd_empregado);
@@ -70,7 +70,7 @@ VALUES
 
 --1.Escreva uma query para mostrar empregados e seus dependentes com as seguintes colunas:
 --colunas -> nome empregado, data de nascimento do empregado, nome da esposa, nome dos filho e nome das filha.
-SELECT DISTINCT
+SELECT
     e.nm_empregado AS 'Nome do Empregado', 
     e.dt_nasciEmpre AS 'Data de Nascimento do Empregado', 
     d1.nm_dependente AS 'Nome da Esposa', 
@@ -188,7 +188,7 @@ JOIN
 JOIN
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1
 WHERE
-    nm_estadoEmpre = 'SP'
+    nm_estadoEmpre = 'SP';
 
 --7.Escreva uma query para mostrar as cidades do estado de ‘RJ’ com as seguintes colunas:
 --colunas -> nome empregado, nome da esposa, nome do filho, data de nascimento do filho
@@ -210,4 +210,4 @@ JOIN
 JOIN
     tb_dependente d3 ON e.cd_empregado = d3.cd_empregado AND d3.cd_grauParentesco = 1
 WHERE
-    nm_estadoEmpre = 'RJ'
+    nm_estadoEmpre = 'RJ';
