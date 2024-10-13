@@ -49,3 +49,19 @@ WHERE
         select avg(vl_oferta)
         from tb_oferta
     );
+
+--5. Faça uma lista com todos os imóveis com preço superior à média de preço dos imóveis do mesmo bairro.
+SELECT
+    cd_imovel,
+    vl_preco
+FROM
+    tb_imovel i
+WHERE
+    vl_preco > (
+        SELECT AVG(vl_preco)
+        FROM tb_imovel
+        WHERE cd_bairro = i.cd_bairro --relação entre a subconsulta e a consulta principal
+        AND cd_cidade = i.cd_cidade
+        AND sg_estado = i.sg_estado
+    );
+
