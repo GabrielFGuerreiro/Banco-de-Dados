@@ -65,3 +65,19 @@ WHERE
         AND sg_estado = i.sg_estado
     );
 
+--6. Faça uma lista dos imóveis com o maior preço agrupado por bairro, cujo maior preço seja superior à média de preços dos imóveis.
+
+
+--7. Faça uma lista com os imóveis que tem o preço igual ao menor preço de cada vendedor.
+SELECT
+    i.cd_imovel,
+    i.cd_vendedor
+FROM
+    tb_imovel i
+JOIN (--Comparar o preço de cada imóvel com o menor preço de seu respectivo vendedor.
+    select cd_vendedor, min(vl_preco) AS menorpreco
+    from tb_imovel
+    group by cd_vendedor
+    ) min
+ON i.cd_vendedor = min.cd_vendedor
+AND i.vl_preco = min.menorpreco
