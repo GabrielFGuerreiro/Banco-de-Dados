@@ -96,3 +96,23 @@ JOIN (
     ) o2
 ON o.vl_oferta < o2.menor_oferta
 AND o.cd_comprador <> 2;
+
+
+--9. Faça uma lista de todos os imóveis cujo Estado e Cidade sejam os mesmos do vendedor 3, exceto os imóveis do vendedor 3.
+SELECT
+    cd_imovel
+FROM
+    tb_imovel
+WHERE cd_cidade =  (
+    select cd_cidade
+    from tb_imovel
+    where cd_vendedor = 3
+    ) 
+AND sg_estado = (
+    select sg_estado
+    from tb_imovel
+    where cd_vendedor = 3
+    ) 
+AND cd_vendedor <> 3
+
+
