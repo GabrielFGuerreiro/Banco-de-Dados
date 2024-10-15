@@ -115,4 +115,32 @@ AND sg_estado = (
     ) 
 AND cd_vendedor <> 3
 
-
+--10. Faça uma lista com todos os nomes de bairro cujos imóveis sejam do mesmo Estado, cidade e bairro do imóvel código 5.
+SELECT
+    b.nm_bairro
+FROM
+    tb_imovel i
+JOIN 
+    tb_bairro b 
+ON
+    i.cd_bairro = b.cd_bairro
+    AND i.cd_cidade = b.cd_cidade
+    AND i.sg_estado = b.sg_estado
+WHERE
+    i.cd_bairro = (
+        SELECT cd_bairro
+        FROM tb_imovel
+        WHERE cd_imovel = 5
+    )
+AND
+    i.cd_cidade = (
+        SELECT cd_cidade
+        FROM tb_imovel
+        WHERE cd_imovel = 5
+    )
+AND
+    i.sg_estado = (
+        SELECT sg_estado
+        FROM tb_imovel
+        WHERE cd_imovel = 5
+    );
