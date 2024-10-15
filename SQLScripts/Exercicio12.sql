@@ -81,3 +81,18 @@ JOIN (--Comparar o preço de cada imóvel com o menor preço de seu respectivo v
     ) min
 ON i.cd_vendedor = min.cd_vendedor
 AND i.vl_preco = min.menorpreco
+
+
+--8. Faça uma lista com as ofertas menores que todas as ofertas do comprador 2, exceto os imóveis do próprio comparador.
+SELECT
+    o.cd_imovel,
+    o.vl_oferta
+FROM
+    tb_oferta o
+JOIN (
+    SELECT MIN(vl_oferta) AS menor_oferta
+    FROM tb_oferta
+    WHERE cd_comprador = 2
+    ) o2
+ON o.vl_oferta < o2.menor_oferta
+AND o.cd_comprador <> 2;
