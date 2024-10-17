@@ -95,15 +95,14 @@ SELECT
     o.cd_imovel,
     o.vl_oferta
 FROM
-    tb_oferta o
-JOIN (
-    SELECT MIN(vl_oferta) AS menor_oferta
-    FROM tb_oferta
-    WHERE cd_comprador = 2
-    ) o2
-ON o.vl_oferta < o2.menor_oferta
-AND o.cd_comprador <> 2;
-
+    tb_oferta o,(
+        select MIN(vl_oferta) AS menor_oferta
+        from tb_oferta
+        where cd_comprador = 2
+        ) o2
+WHERE
+    o.vl_oferta < o2.menor_oferta
+    AND o.cd_comprador <> 2;
 
 --9. Faça uma lista de todos os imóveis cujo Estado e Cidade sejam os mesmos do vendedor 3, exceto os imóveis do vendedor 3.
 SELECT
