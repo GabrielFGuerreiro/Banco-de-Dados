@@ -64,7 +64,17 @@ WHERE
     );
 
 --6. Faça uma lista dos imóveis com o maior preço agrupado por bairro, cujo maior preço seja superior à média de preços dos imóveis.
-
+SELECT
+	cd_imovel, cd_bairro
+FROM
+	tb_imovel
+WHERE
+	vl_preco > (
+		select avg(vl_preco)
+		from tb_imovel
+		)
+GROUP BY 
+	cd_imovel, cd_bairro;
 
 --7. Faça uma lista com os imóveis que tem o preço igual ao menor preço de cada vendedor.
 SELECT
