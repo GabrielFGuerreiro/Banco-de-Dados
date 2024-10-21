@@ -65,7 +65,7 @@ WHERE
 
 --6. Faça uma lista dos imóveis com o maior preço agrupado por bairro, cujo maior preço seja superior à média de preços dos imóveis.
 SELECT
-	cd_imovel, cd_bairro
+	max(vl_preco), cd_imovel, cd_bairro
 FROM
 	tb_imovel
 WHERE
