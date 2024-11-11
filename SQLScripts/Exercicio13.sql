@@ -14,9 +14,32 @@ BEGIN
     AND b.cd_cidade = i.cd_cidade
     AND b.sg_estado = i.sg_estado
 END;
-drop PROCEDURE SP_Valor_Bairro
-select * from tb_bairro
 
 exec SP_Valor_Bairro AEROPORTO, 10
 
+--2. Escreva uma procedure que receba o código do comprador e um valor percentual como parâmetro,
+--aplique este percentual de acréscimo na última oferta com o  maior valor que esse comprador fez,
+--se o valor desta oferta representar um valor inferior a 10% de acréscimo do valor do Imóvel, desconsiderar o reajuste.
+CREATE PROCEDURE SP_AUMENTA_OFERTA
+    @codigoComprador int,
+    @valorPercent money
+AS
+BEGIN
+    UPDATE o
+    SET vl_oferta = vl_oferta * (1 + @valorPercent / 100.0)
+    FROM tb_oferta o
+    WHERE cd_comprador = @codigoComprador
+    AND vl_oferta = (
+        select max(vl_oferta)
+        from tb_oferta
+        WHERE cd_comprador = @codigoComprador
+        )
+    AND o.vl_oferta >= (
+        select vl_preco * 1.10
+        from tb_imovel
+        WHERE cd_imovel = o.cd_imovel
+        )
+END
+
+exec SP_AUMENTA_OFERTA 2, 10
 
