@@ -61,3 +61,17 @@ END
 
 exec SP_CALCULA_MEDIA_OFERTAS
 
+--4. Faça uma procedure que aplique um aumento no valor do Imóvel (cujo valor deve  ser recebido como parâmetro),
+--somente para os imóveis que estão com um índice de “BAIXO” na faixa de imóveis.  
+CREATE PROCEDURE SP_AUMENTA_VALOR_IMOVEL_FAIXA
+    @valorAumento int
+AS
+BEGIN
+    UPDATE i
+    SET vl_preco += @valorAumento
+    FROM tb_imovel i
+    WHERE vl_preco BETWEEN 0 AND 105000
+END
+
+exec SP_AUMENTA_VALOR_IMOVEL_FAIXA 1000
+
