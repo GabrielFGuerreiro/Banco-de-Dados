@@ -76,7 +76,7 @@ END
 exec SP_AUMENTA_VALOR_IMOVEL_FAIXA 1000
 
 
---Escreva uma procedure que receba um valor percentual como parâmetro e aplique um desconto no valor do Imóvel
+--5.Escreva uma procedure que receba um valor percentual como parâmetro e aplique um desconto no valor do Imóvel
 --somente nos Imóveis do estado de São Paulo.  
 CREATE PROCEDURE SP_DESCONTO_IMOVEL_SAOPAULO
     @valorPercent float
@@ -90,3 +90,68 @@ END
 
 exec SP_DESCONTO_IMOVEL_SAOPAULO 0.10
 
+--6. Escreva uma procedure que receba como parâmetro o número do Imóvel e um número que represente a quantidade de parcelas
+--em que o valor do imóvel será dividido. A procedure deve obter o valor total deste pedido, calcular o valor de
+--cada parcela e gravar cada parcela na tabela Parcelas. Se a quantidade de parcelas for maior que 3, acrescente 10% ao valor
+--total do pedido, divida-o na quantidade de parcelas recebida como parâmetro e grave-as na tabela Parcelas.
+--Se a quantidade de parcelas for 1, retorne a mensagem: pedido à vista e interrompa o  processamento.
+--Não deixe que o número de parcelas ultrapasse a 10. Se  ultrapassar, retorne a mensagem: Quantidade de parcelas inválida.
+--Antes de executar esta procedure, criar a tabela Parcelas e fazer o relacionamento com Imóvel e Comprador. 
+
+CREATE TABLE tb_parcelas( --CREATE
+    cd_parcela INT IDENTITY(1,1) NOT NULL,  --IDENTITY = INCREMENTA
+    cd_imovel INT,
+    cd_comprador INT,
+    vl_parcela money,
+    qnt_parcelas INT
+)
+
+ALTER TABLE tb_parcelas  --ALTER (PK)
+ADD CONSTRAINT PK_parcela PRIMARY KEY (cd_parcela)
+
+ALTER TABLE tb_parcelas --ALTER (FKs)
+ADD FOREIGN KEY (cd_imovel) REFERENCES tb_imovel (cd_imovel)
+
+ALTER TABLE tb_parcelas
+ADD FOREIGN KEY (cd_comprador) REFERENCES tb_comprador (cd_comprador)
+
+CREATE PROCEDURE SP_PARCELAS_IMOVEL --PROCEDURE
+    @numImovel int,
+    @qntParcelas int
+AS
+BEGIN
+    IF @qntParcelas > 10
+        BEGIN
+        PRINT 'Quantidade de parcelas inválida!'
+        RETURN
+    END
+
+    IF @qntParcelas = 1
+    BEGIN
+        PRINT 'Pedido à vista'
+        RETURN
+    END
+
+    DECLARE @vl_imovelVar MONEY;
+    SELECT @vl_imovelVar = vl_preco FROM tb_imovel WHERE cd_imovel = @numImovel
+    
+    IF @qntParcelas > 3
+    BEGIN
+        SET @vl_imovelVar = @vl_imovelVar * 1.10
+    END
+
+    DECLARE @valorParcela MONEY;
+    SET @valorParcela = @vl_imovelVar / @qntParcelas;
+
+    DECLARE @i INT = 1;
+    WHILE @i <= @qntParcelas
+    BEGIN
+        INSERT INTO tb_parcelas (cd_imovel, cd_comprador, vl_parcela, qnt_parcelas)
+        SELECT @numImovel, cd_comprador, @valorParcela, @qntParcelas
+        FROM tb_comprador
+
+        SET @i = @i + 1;
+    END
+END
+
+exec SP_PARCELAS_IMOVEL 1, 5
