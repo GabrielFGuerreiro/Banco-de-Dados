@@ -2,11 +2,11 @@
 
 CREATE PROCEDURE SP_Valor_Bairro
     @bairro varchar (30),
-    @valorporcent int
+    @valorporcent float
 AS
 BEGIN
     UPDATE i
-    SET i.vl_preco = i.vl_preco * (1 + @valorporcent / 100.0)
+    SET i.vl_preco = i.vl_preco * @valorporcent
     FROM tb_imovel i
     JOIN tb_bairro b on i.cd_bairro = b.cd_bairro
     WHERE b.nm_bairro = @bairro
@@ -15,18 +15,18 @@ BEGIN
     AND b.sg_estado = i.sg_estado
 END;
 
-exec SP_Valor_Bairro AEROPORTO, 10
+exec SP_Valor_Bairro morumbi, 1.10
 
 --2. Escreva uma procedure que receba o código do comprador e um valor percentual como parâmetro,
 --aplique este percentual de acréscimo na última oferta com o  maior valor que esse comprador fez,
 --se o valor desta oferta representar um valor inferior a 10% de acréscimo do valor do Imóvel, desconsiderar o reajuste.
 CREATE PROCEDURE SP_AUMENTA_OFERTA
     @codigoComprador int,
-    @valorPercent money
+    @valorPercent float
 AS
 BEGIN
     UPDATE o
-    SET vl_oferta = vl_oferta * (1 + @valorPercent / 100.0)
+    SET vl_oferta = vl_oferta * @valorPercent
     FROM tb_oferta o
     WHERE cd_comprador = @codigoComprador
     AND vl_oferta = (
@@ -41,7 +41,7 @@ BEGIN
         )
 END
 
-exec SP_AUMENTA_OFERTA 2, 10
+exec SP_AUMENTA_OFERTA 2, 1.15
 
 --3. Escreva uma procedure que calcule a média dos valores das ofertas de cada imóvel e salve esta média no registro do imóvel.
 ALTER TABLE tb_imovel
@@ -74,4 +74,19 @@ BEGIN
 END
 
 exec SP_AUMENTA_VALOR_IMOVEL_FAIXA 1000
+
+
+--Escreva uma procedure que receba um valor percentual como parâmetro e aplique um desconto no valor do Imóvel
+--somente nos Imóveis do estado de São Paulo.  
+CREATE PROCEDURE SP_DESCONTO_IMOVEL_SAOPAULO
+    @valorPercent float
+AS
+BEGIN
+    UPDATE i
+    SET vl_preco = vl_preco - (vl_preco * @valorPercent)
+    FROM tb_imovel i
+    where sg_estado = 'SP'
+END
+
+exec SP_DESCONTO_IMOVEL_SAOPAULO 0.10
 
