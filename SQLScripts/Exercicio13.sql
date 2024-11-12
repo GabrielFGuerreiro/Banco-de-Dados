@@ -43,3 +43,21 @@ END
 
 exec SP_AUMENTA_OFERTA 2, 10
 
+--3. Escreva uma procedure que calcule a média dos valores das ofertas de cada imóvel e salve esta média no registro do imóvel.
+ALTER TABLE tb_imovel
+ADD vl_media_oferta money;
+
+CREATE PROCEDURE SP_CALCULA_MEDIA_OFERTAS
+AS
+BEGIN
+    UPDATE i
+    SET i.vl_media_oferta = (
+        SELECT AVG(vl_oferta)
+        FROM tb_oferta o
+        WHERE o.cd_imovel = i.cd_imovel
+        )
+    FROM tb_imovel i
+END
+
+exec SP_CALCULA_MEDIA_OFERTAS
+
