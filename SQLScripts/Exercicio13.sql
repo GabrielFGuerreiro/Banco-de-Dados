@@ -155,3 +155,26 @@ BEGIN
 END
 
 exec SP_PARCELAS_IMOVEL 1, 5
+
+
+--7.Escreva uma função que receba o código do Imóvel como parâmetro e retorne a quantidade de ofertas recebidas de todos
+--os imóveis mesmo que não tenha oferta cadastrada, mostrando zero na quantidade.  
+
+CREATE FUNCTION FN_CONTA_QNT_OFERTAS (@cd_imovel INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @qtd_ofertas INT
+
+    SELECT @qtd_ofertas = 
+        CASE 
+            WHEN COUNT(vl_oferta) > 0 THEN COUNT(vl_oferta)
+            ELSE 0
+        END
+    FROM tb_oferta
+    WHERE cd_imovel = @cd_imovel
+
+    RETURN @qtd_ofertas
+END
+
+SELECT dbo.FN_CONTA_QNT_OFERTAS(5)AS qtd_ofertas
