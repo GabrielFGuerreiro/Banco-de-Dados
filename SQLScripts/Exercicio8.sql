@@ -68,16 +68,17 @@ dt_lancto date,
 qt_imovelIndicado int)
 
 
---Criando chaves primárias usando o ALTER TABLE
+--Criando chaves primï¿½rias usando o ALTER TABLE
 -- ALTER TABLE *tabela*  ADD PRIMARY KEY *(campo)*
 
-ALTER TABLE tb_faixaImovel  ADD PRIMARY KEY (cd_faixa);
+ALTER TABLE tb_faixaImovel ADD PRIMARY KEY (cd_faixa);
 ALTER TABLE tb_vendedor ADD PRIMARY KEY (cd_vendedor);
 ALTER TABLE tb_oferta ADD PRIMARY KEY (cd_comprador,cd_imovel);
 ALTER TABLE tb_estado ADD PRIMARY KEY (sg_estado);
 ALTER TABLE tb_cidade ADD PRIMARY KEY (sg_estado, cd_cidade);
 ALTER TABLE tb_bairro ADD PRIMARY KEY (sg_estado, cd_cidade, cd_bairro); --PKs compostas (sempre de msm tabela) // != de declarar separadamente
 ALTER TABLE tb_imovel ADD PRIMARY KEY (cd_imovel);
+ALTER TABLE tb_comprador ADD PRIMARY KEY (cd_comprador);
 
 
 --Criando chaves estrangeiras usando o ALTER TABLE
