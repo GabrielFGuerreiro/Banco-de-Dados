@@ -166,7 +166,7 @@ AS
 BEGIN
     DECLARE @qtd_ofertas INT
 
-    SELECT @qtd_ofertas = 
+    SELECT @qtd_ofertas =  --recebe o valor
         CASE 
             WHEN COUNT(vl_oferta) > 0 THEN COUNT(vl_oferta)
             ELSE 0
@@ -178,3 +178,23 @@ BEGIN
 END
 
 SELECT dbo.FN_CONTA_QNT_OFERTAS(5)AS qtd_ofertas
+
+
+--8.Escreva uma função que receba o código do Imóvel como parâmetro e mostre o nome do comprador que fez a última oferta.  
+
+CREATE FUNCTION FN_RETORNA_COMPRADOR (@cd_imovel INT)
+RETURNS VARCHAR(30)
+AS
+BEGIN
+    DECLARE @nm_comprador VARCHAR(30)
+
+    SELECT @nm_comprador = c.nm_comprador
+    FROM tb_oferta o
+    JOIN tb_comprador c ON o.cd_comprador = c.cd_comprador
+    WHERE o.cd_imovel = @cd_imovel
+    ORDER BY o.dt_oferta DESC
+
+    RETURN @nm_comprador
+END
+
+SELECT dbo.FN_RETORNA_COMPRADOR(1) AS 'Nom do comprador'
