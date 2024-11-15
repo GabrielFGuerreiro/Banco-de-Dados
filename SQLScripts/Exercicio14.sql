@@ -13,3 +13,13 @@ BEGIN
     FROM tb_imovel i
 END
 
+--2. Escreva um trigger que não permita a alteração de dados na tabela Estado e a sua exclusão.
+CREATE TRIGGER IMPEDE_ALTERACAO_EXCLUSAO
+ON tb_estado
+AFTER UPDATE, DELETE
+AS
+BEGIN
+    PRINT 'Não é possível modificar nem excluir os dados desta tabela!'
+    ROLLBACK TRANSACTION
+END
+
