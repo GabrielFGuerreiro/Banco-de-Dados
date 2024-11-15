@@ -23,3 +23,12 @@ BEGIN
     ROLLBACK TRANSACTION
 END
 
+--3. Escreva um trigger que não permita a alteração de dados na tabela Faixa Imóvel e a sua exclusão.
+CREATE TRIGGER IMPEDE_ALTERACAO_EXCLUSAO2
+ON tb_faixaImovel
+AFTER UPDATE, DELETE
+AS
+BEGIN
+    PRINT 'Não é possível modificar nem excluir os dados desta tabela!'
+    ROLLBACK TRANSACTION
+END
